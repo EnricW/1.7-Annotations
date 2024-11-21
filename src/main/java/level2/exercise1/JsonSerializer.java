@@ -21,8 +21,8 @@ public class JsonSerializer {
         String directory = annotation.directory();
 
         File dir = new File(directory);
-        if (!dir.exists()) {
-            dir.mkdirs();
+        if (!dir.exists() && !dir.mkdirs()) {
+            throw new IOException("Could not create directory: " + directory);
         }
 
         String fileName = clazz.getSimpleName() + ".json";
